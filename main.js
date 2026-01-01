@@ -191,7 +191,7 @@ function layoutNoCrossTargets() {
 
   const base = Math.min(w, h);
   const rCycle = base * 0.22;
-  const tailStep =60+0*Math.max(28, Math.min(46, base * 0.055));
+  const tailStep =Math.max(28, Math.min(46, base * 0.055));
 
   // Sin ciclo aún: una cola suave hacia la derecha (simple y sin cruces).
   if (!cycle.length || cycleStartIndex < 0) {
