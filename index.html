@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Unhappy Numbers — Visualización estilo 3Blue1Brown</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand__title">Unhappy Numbers</div>
+          <div class="brand__subtitle">Iteración: suma de cuadrados de dígitos • resalta el ciclo (≠ 1)</div>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span class="field__label">n</span>
+            <input id="nInput" class="field__input" type="number" inputmode="numeric" min="1" value="20" />
+          </label>
+          <label class="field field--wide">
+            <span class="field__label">Layout</span>
+            <select id="layoutSelect" class="field__input" aria-label="Layout del grafo">
+              <option value="no_cross" selected>Sin cruces</option>
+              <option value="orbital">Orbital</option>
+            </select>
+          </label>
+          <button id="randomBtn" class="btn btn--ghost" title="Elegir un número infeliz aleatorio">Aleatorio</button>
+          <button id="startBtn" class="btn btn--primary">Iniciar</button>
+          <button id="pauseBtn" class="btn btn--ghost" disabled>Pausar</button>
+          <button id="stepBtn" class="btn btn--ghost" title="Un paso">Paso</button>
+          <label class="field field--wide">
+            <span class="field__label">Velocidad</span>
+            <input id="speedInput" class="field__input" type="range" min="0.15" max="2.5" step="0.05" value="1" />
+          </label>
+        </div>
+      </header>
+
+      <main class="stage">
+        <canvas id="canvas"></canvas>
+        <aside class="panel">
+          <div class="panel__section">
+            <div class="panel__title">Estado</div>
+            <div id="status" class="panel__text">Listo.</div>
+          </div>
+          <div class="panel__section">
+            <div class="panel__title">Regla</div>
+            <div id="rule" class="panel__mono"></div>
+          </div>
+          <div class="panel__section">
+            <div class="panel__title">Trayectoria</div>
+            <div id="path" class="panel__mono panel__mono--wrap"></div>
+          </div>
+          <div class="panel__section">
+            <div class="panel__title">Ciclo detectado</div>
+            <div id="cycle" class="panel__mono panel__mono--wrap"></div>
+          </div>
+          <div class="panel__section panel__hint">
+            <div class="panel__title">Tip</div>
+            <div class="panel__text">
+              Los números infelices caen en un ciclo (en base 10, casi siempre el ciclo clásico).
+              Aquí lo dibujamos como un “orbital” con movimiento suave y resaltado del lazo.
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
+
