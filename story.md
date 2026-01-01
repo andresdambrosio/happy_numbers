@@ -1,10 +1,44 @@
-El año pasado, Fran Ruda (Dios lo tenga en la gloria), nos deseo un 2025 muy matemático. Nos dio datos muy interesantes del 2025. Para hacerle honor, al 2025, me puse a buscar cosas interesantes del 2026.
+# Números Felices e Infelices
 
-Y descubrí algo que no sabía. En teoría de números, que es la parte de la matemática que estudia los números, hay números que se llaman felices y hay otros números que se llaman infelices.
+El año pasado, Fran Ruda (Dios lo tenga en la gloria) nos deseó un **2025 muy matemático**. Nos dio datos fascinantes sobre este año. Para honrar su legado, me puse a buscar curiosidades del 2026.
 
-Lo muestro con un ejemplo. Dejenme arrancar por el número 2. 2 elevado al cuadrado es 4. 4 elevado al cuadrado es 16. Ahora, como tenemos un número de dos dígitos, los separamos y hacemos 1 elevado al cuadrado más 6 elevado al cuadrado. Eso nos da 37. Ahora repetimos el procedimiento haciendo 3*3+7*7 = 58. Ahora repetimos, 5*5+8*8=89. 8*8+9*9=145.
-1*1+4*4+5*5=42. 4*4+2*2=20. 2*2+0*0=4. Y acá notamos algo, volvemos al 4. Con lo cual se hace un ciclo infinito sin fin. Y como no hay nada que estar condenado a repetir lo mismo hasta el infinito (como el mito de sisifo: https://en.wikipedia.org/wiki/The_Myth_of_Sisyphus), llamamos a este número (el 2), un número infeliz. Piensen en nuestros usuarios cuándo quedan atrapados en un loop infinito, diganme algo más infeliz que eso.
+Y descubrí algo que no sabía: en **teoría de números** (la rama de las matemáticas que estudia las propiedades de los números enteros) existen números que se llaman **felices** y otros que se llaman **infelices**.
 
-Si empezamos a hacer esta cuenta para otros números, podemos ver que se repite el patrón, vamos avanzando en la cadena de números hasta que llegamos a un 4 y ahí nos quedamos en un loop infinito.
+## El Número 2: Un Ejemplo Infeliz
 
-Hasta que llegamos a un número mágico, el 7. 7+7=14. 1*1+4*4=17. 1*1+7*7=49. 4*4+9*9=97. 9*9+7*7=130. 1*1+3*3=10. 1*1+0*0=1. 1*1=1. Llegó a un fin, llegamos al 1 y se rompio un ciclo.
+Déjame mostrarte con un ejemplo. Empecemos por el número **2**:
+
+- 2² = **4**
+- 4² = **16**
+- 1² + 6² = 1 + 36 = **37**
+- 3² + 7² = 9 + 49 = **58**
+- 5² + 8² = 25 + 64 = **89**
+- 8² + 9² = 64 + 81 = **145**
+- 1² + 4² + 5² = 1 + 16 + 25 = **42**
+- 4² + 2² = 16 + 4 = **20**
+- 2² + 0² = 4 + 0 = **4**
+
+¿Y acá qué notamos? **Volvemos al 4**. Se forma un ciclo infinito sin escapatoria.
+
+No hay nada más triste que estar condenado a repetir lo mismo hasta el infinito (como [el mito de Sísifo](https://en.wikipedia.org/wiki/The_Myth_of_Sisyphus)). Por eso llamamos al **2** un **número infeliz**.
+
+_Piensen en nuestros usuarios cuando quedan atrapados en un loop infinito... ¿hay algo más infeliz que eso?_
+
+Si probamos con otros números, veremos que la mayoría sigue el mismo patrón: avanzan por una cadena de transformaciones hasta que llegan al **4**, quedando atrapados en un ciclo eterno.
+
+## El Número 7: La Excepción Mágica
+
+Pero luego llegamos a un número mágico: el **7**.
+
+- 7² = **49**
+- 4² + 9² = 16 + 81 = **97**
+- 9² + 7² = 81 + 49 = **130**
+- 1² + 3² + 0² = 1 + 9 + 0 = **10**
+- 1² + 0² = 1 + 0 = **1**
+- 1² = **1**
+
+¡Llegó a un final! Alcanzamos el **1** y el ciclo se rompió. Por eso llamamos al **7** un **número feliz**.
+
+---
+
+Esta visualización interactiva te permite explorar este fascinante fenómeno matemático. ¿Será 2026 un número feliz o infeliz? ¡Descúbrelo!
