@@ -100,6 +100,9 @@ let dpr = 1;
 let layoutMode = "no_cross";
 /** @type {{x:number,y:number}} */
 let layoutCenter = { x: 0, y: 0 };
+/** @type {{scale:number, offsetX:number, offsetY:number}} */
+let viewTransform = { scale: 1, offsetX: 0, offsetY: 0 };
+let autoFitEnabled = false;
 
 function setStatus(text) {
   statusEl.textContent = text;
@@ -258,6 +261,55 @@ function worldLayoutTargets() {
   else layoutNoCrossTargets();
 }
 
+function calculateBoundingBox() {
+  if (nodes.length === 0) return null;
+
+  let minX = Infinity, minY = Infinity;
+  let maxX = -Infinity, maxY = -Infinity;
+
+  for (const node of nodes) {
+    const x = node.target.x;
+    const y = node.target.y;
+    const r = node.radius * 3; // margen extra para halos
+    minX = Math.min(minX, x - r);
+    minY = Math.min(minY, y - r);
+    maxX = Math.max(maxX, x + r);
+    maxY = Math.max(maxY, y + r);
+  }
+
+  return { minX, minY, maxX, maxY, width: maxX - minX, height: maxY - minY };
+}
+
+function fitGraphToCanvas() {
+  const bbox = calculateBoundingBox();
+  if (!bbox) return;
+
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  const padding = 40; // padding en píxeles
+
+  const availableWidth = w - padding * 2;
+  const availableHeight = h - padding * 2;
+
+  // Calcular escala para que quepa todo
+  const scaleX = availableWidth / bbox.width;
+  const scaleY = availableHeight / bbox.height;
+  const scale = Math.min(scaleX, scaleY, 1.2); // máximo 1.2x zoom
+
+  // Calcular centro del bounding box
+  const bboxCenterX = (bbox.minX + bbox.maxX) / 2;
+  const bboxCenterY = (bbox.minY + bbox.maxY) / 2;
+
+  // Calcular offset para centrar
+  const canvasCenterX = w / 2;
+  const canvasCenterY = h / 2;
+
+  viewTransform.scale = scale;
+  viewTransform.offsetX = canvasCenterX - bboxCenterX * scale;
+  viewTransform.offsetY = canvasCenterY - bboxCenterY * scale;
+  autoFitEnabled = true;
+}
+
 function ensureNode(value) {
   const existing = nodeIndexByValue.get(value);
   if (existing != null) return existing;
@@ -289,6 +341,10 @@ function resetSimulation(n) {
   cycleStartIndex = -1;
   cycleEdgeSet = new Set();
   edgeAnim = null;
+
+  // Resetear auto-fit
+  autoFitEnabled = false;
+  viewTransform = { scale: 1, offsetX: 0, offsetY: 0 };
 
   sequence.push(n);
   ensureNode(n);
@@ -338,6 +394,10 @@ function stepOnce() {
     worldLayoutTargets();
     startEdge(n, next);
     updateSidePanel();
+
+    // Activar auto-fit cuando se completa el ciclo
+    setTimeout(() => fitGraphToCanvas(), 100);
+
     if (next === 1) {
       setStatus("Llegó a 1 (feliz).");
     } else {
@@ -490,6 +550,13 @@ function draw() {
 
   bgGrid();
 
+  // Aplicar transformación si auto-fit está activado
+  ctx.save();
+  if (autoFitEnabled) {
+    ctx.translate(viewTransform.offsetX, viewTransform.offsetY);
+    ctx.scale(viewTransform.scale, viewTransform.scale);
+  }
+
   // Edges existentes (trayectoria completa) como "ghost"
   for (let i = 0; i < Math.max(0, sequence.length - 1); i++) {
     const a = sequence[i];
@@ -529,7 +596,10 @@ function draw() {
     drawNode(node, node.value === current);
   }
 
-  // Texto sutil de “resultado”
+  // Restaurar transformación antes del texto de resultado
+  ctx.restore();
+
+  // Texto sutil de "resultado" (sin transformación)
   ctx.save();
   ctx.fillStyle = COLORS.muted;
   ctx.font = `600 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`;
